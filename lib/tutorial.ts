@@ -1,14 +1,14 @@
-import { Cursor } from '@glimmer/interfaces';
-import { State } from '@glimmer/object-reference';
-import { artifacts } from '@glimmer/program';
-import { renderAot, renderSync, Runtime } from '@glimmer/runtime';
-import { strip } from '@glimmer/util';
-import createHTMLDocument from '@simple-dom/document';
-import { SimpleElement } from '@simple-dom/interface';
-import Serializer from '@simple-dom/serializer';
-import voidMap from '@simple-dom/void-map';
-import { compile, context } from './context';
-import { RUNTIME_RESOLVER } from './env';
+import { Cursor } from "@glimmer/interfaces";
+import { State } from "@glimmer/object-reference";
+import { artifacts } from "@glimmer/program";
+import { renderAot, renderSync, Runtime } from "@glimmer/runtime";
+import { strip } from "@glimmer/util";
+import createHTMLDocument from "@simple-dom/document";
+import { SimpleElement } from "@simple-dom/interface";
+import Serializer from "@simple-dom/serializer";
+import voidMap from "@simple-dom/void-map";
+import { compile, context } from "./context";
+import { RUNTIME_RESOLVER } from "./env";
 
 /**
  * The source code for the module we're compiling.
@@ -76,12 +76,12 @@ let runtime = Runtime(document, payload, RUNTIME_RESOLVER);
  * Create an `UpdatableReference` for the value of `this` in the module. Using an
  * UpdatableReference allows us to change it later and re-render the output.
  */
-let state = State({ suffix: '!', num: 5 });
+let state = State({ suffix: "!", num: 5 });
 
 /**
  * Create a new element to render into.
  */
-let element = document.createElement('main');
+let element = document.createElement("main");
 
 /**
  * Create a cursor position for the rendering, which is just the element itself.
@@ -89,12 +89,11 @@ let element = document.createElement('main');
 let cursor: Cursor = { element, nextSibling: null };
 
 let iterator = renderAot(runtime, main, cursor, state);
-
 let result = renderSync(runtime.env, iterator);
 
 console.log(serialize(element));
 
-state.update({ suffix: '?', num: 10 });
+state.update({ suffix: "?", num: 10 });
 
 result.rerender();
 console.log(serialize(element));

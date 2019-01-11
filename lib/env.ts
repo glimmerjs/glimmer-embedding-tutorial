@@ -1,20 +1,20 @@
-import { Helper, ResolvedValue, VMArguments } from '@glimmer/interfaces';
-import { map } from '@glimmer/reference';
-import { SimpleComponentManager } from '@glimmer/runtime';
+import { ResolvedValue, RuntimeResolver } from "@glimmer/interfaces";
+import { map } from "@glimmer/reference";
+import { TEMPLATE_ONLY_COMPONENT } from "@glimmer/runtime";
 
-export const RUNTIME_RESOLVER = {
-  resolve<U extends ResolvedValue>(handle: number): U {
-    if (handle >= TABLE.length) {
-      throw new Error(`Unexpected handle ${handle}`);
-    } else {
-      return TABLE[handle] as U;
+// prettier-ignore
+const TABLE: ResolvedValue[] = [
+  // handle 0 is the increment helper
+  args => map(args.positional.at(0), (i: number) => i + 1),
+
+  // handle 1 is a template only component
+  TEMPLATE_ONLY_COMPONENT
+];
+
+export const RUNTIME_RESOLVER: RuntimeResolver = {
+  resolve(handle: number): ResolvedValue | void {
+    if (handle < TABLE.length) {
+      return TABLE[handle];
     }
-  },
+  }
 };
-
-const increment: Helper = (args: VMArguments) => {
-  return map(args.positional.at(0), (i: number) => i + 1);
-};
-
-const TEMPLATE_ONLY_COMPONENT = { state: null, manager: new SimpleComponentManager() };
-const TABLE: ResolvedValue[] = [increment, TEMPLATE_ONLY_COMPONENT];
