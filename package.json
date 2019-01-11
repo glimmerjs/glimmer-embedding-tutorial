@@ -1,0 +1,23 @@
+{
+  "name": "glimmer-embedding-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@glimmer/compiler": "^0.36.5",
+    "@glimmer/interfaces": "^0.36.5",
+    "@glimmer/util": "^0.36.5",
+    "@glimmer/opcode-compiler": "^0.36.5",
+    "@glimmer/program": "^0.36.5",
+    "@glimmer/runtime":"^0.36.5",
+    "@glimmer/object-reference": "^0.36.5",
+    "@simple-dom/interface": "^1.4.0",
+    "@simple-dom/document": "^1.4.0",
+    "@simple-dom/serializer": "^1.4.0",
+    "@simple-dom/void-map": "^1.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2",
+    "eslint": "^5.12.0"
+  }
+}
